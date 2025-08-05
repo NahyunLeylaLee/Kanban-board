@@ -171,6 +171,7 @@ const ColumnBox = ({ card, cardIndex, setDragOverInfo, setDraggedCard, draggedCa
                               group bg-white rounded-xl p-4 shadow-lg border border-gray-200 cursor-grab active:cursor-grabbing
                               transform transition-all duration-200 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02]
                               relative ${isDragging ? 'z-50 opacity-50' : 'z-10'}
+                              dark:bg-theme-card
                             `}
         style={{
           animationDelay: `${cardIndex * 50}ms`,
@@ -187,11 +188,11 @@ const ColumnBox = ({ card, cardIndex, setDragOverInfo, setDraggedCard, draggedCa
         </button>
 
         <div className="pr-8">
-          <h4 className="font-bold text-gray-900 mb-2 text-lg leading-tight">
+          <h4 className="font-bold text-gray-900 mb-2 text-lg leading-tight dark:text-theme-text">
             {card.title}
           </h4>
           {card.description && (
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <p className="text-gray-600 text-sm leading-relaxed dark:text-theme-text">
               {card.description}
             </p>
           )}

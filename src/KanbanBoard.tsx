@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { colors, initial } from './data/data';
-import { BoardData, Card, Column, DraggedCard, DragOver } from './type/type';
+import { BoardData, Column} from './type/type';
 import Board from './components/board';
+import { useRecoilState } from 'recoil';
+import { isDarkState } from './atoms';
 
 const KanbanBoard: React.FC = () => {
   // Initial data
   const [data, setData] = useState<BoardData>(initial);
   const [isAddingColumn, setIsAddingColumn] = useState(false);
   const [newColumnTitle, setNewColumnTitle] = useState('');
+  const [isDark, setIsDark] = useRecoilState(isDarkState);
 
   const addColumn = () => {
     if (!newColumnTitle.trim()) return;
@@ -37,13 +40,20 @@ const KanbanBoard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 dark:bg-theme-bg p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold text-gray-800 mb-2 tracking-tight">
-            Kanban Board
-          </h1>
+          <div className='flex justify-center items-center'>
+            <h1 className="text-5xl font-bold text-gray-800 mb-2 tracking-tight dark:text-theme-text">
+              Kanban Board
+            </h1>
+            <img
+              src={isDark ? "/Kanban-board/img/sunny.png" : "/Kanban-board/img/moon.png"}
+              onClick={() => setIsDark(!isDark)}
+              className='hover:cursor-pointer w-8 h-8 ml-3 dark:text-white'
+            />
+          </div>
           <p className="text-gray-600 text-lg">
             Drag and drop cards between columns to organize your tasks
           </p>
@@ -57,7 +67,7 @@ const KanbanBoard: React.FC = () => {
 
           {/* Add Column Section */}
           {isAddingColumn ? (
-            <div className="flex-shrink-0 w-80 bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+            <div className="flex-shrink-0 w-80 bg-white rounded-lg shadow-lg border border-gray-200 p-6 dark:bg-theme-bg">
               <input
                 type="text"
                 placeholder="Enter column title..."

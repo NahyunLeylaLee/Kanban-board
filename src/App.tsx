@@ -1,11 +1,11 @@
-import { RecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import KanbanBoard from './KanbanBoard';
-import { isDarkAtom } from './atoms';
+import { isDarkState } from './atoms';
 
 function App() {
-  const isDark = useRecoilValue(isDarkAtom);
+  const isDark = useRecoilValue(isDarkState);
   return (
-    <div className="App">
+    <div className={`App ${isDark && "dark"}`}>
       <title>Kanban Board</title>
       <KanbanBoard />
     </div>

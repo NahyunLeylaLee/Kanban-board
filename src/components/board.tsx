@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { colors } from "../data/data";
 import { BoardData, Card, DraggedCard, DragOver } from "../type/type";
-import Column from "./column-box";
 import ColumnBox from "./column-box";
 
 interface IBoardProps {
@@ -227,6 +226,7 @@ const Board = ({ columnId, index, data, setData }: IBoardProps) => {
                   ${isDropTarget && draggedCard ? 'ring-4 ring-cyan-300/60 bg-cyan-50 scale-105' : ''}
                   ${isDropTarget && draggedColumn ? 'ring-4 ring-yellow-300/60 bg-yellow-50 scale-105' : ''}
                   ${isDragSource ? 'opacity-75' : ''}
+                  dark:bg-theme-bg
                 `}
       style={{
         animationDelay: `${index * 100}ms`
@@ -258,7 +258,7 @@ const Board = ({ columnId, index, data, setData }: IBoardProps) => {
       </div>
 
       {/* Cards Container */}
-      <div className="p-4 min-h-[300px]">
+      <div className="p-4 min-h-[300px] dark:bg-theme-bg">
         <div className="space-y-3">
           {column.cards.map((card, cardIndex) => (
             <ColumnBox
@@ -289,7 +289,7 @@ const Board = ({ columnId, index, data, setData }: IBoardProps) => {
         {/* Add Card Section */}
         <div className="mt-4">
           {newCardColumnId === column.id ? (
-            <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-200 animate-in slide-in-from-bottom-4 duration-300">
+            <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-200 animate-in slide-in-from-bottom-4 duration-300 dark:bg-theme-bg">
               <input
                 type="text"
                 placeholder="Enter card title..."
